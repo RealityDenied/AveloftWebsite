@@ -23,3 +23,14 @@ const revealObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.12 });
 
 document.querySelectorAll('.reveal').forEach((element) => revealObserver.observe(element));
+
+document.querySelectorAll('.mail-guard').forEach((link) => {
+  link.addEventListener('click', (event) => {
+    event.preventDefault();
+    const user = atob(link.dataset.mail || '');
+    const host = atob(link.dataset.host || '');
+    if (user && host) {
+      window.location.href = `mailto:${user}@${host}`;
+    }
+  });
+});
